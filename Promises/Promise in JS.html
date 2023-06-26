@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Promise in JS</title>
+</head>
+<body>
+     
+     <script>
+
+          // call back function
+      /* Synchronous code of execution :- yaha 1st "This the line"
+      console mai show hogi, then function call kiya so function 
+      ki "This is the first function" vali line display hogi.
+      then "this is the another line" show hogi....
+      it means yaha line by line code execute hua.
+        */    
+       /* function myFun(){
+          console.log("This is the first function");
+        } 
+        
+        console.log("This the line");
+        myFun();
+
+        console.log("this is the another line");
+
+          */
+
+        /* asynchronous  code of execution :- yaha humne ek setTimeOut
+        ek function hai, jisme 1st as a argument  arrow function leta hai, 
+        & 2nd milisecond leta hai.jub bhi hum ye setTimeOut fun ka
+        use karte hai to ye asynchronous ka behaviour hai.
+        yaha 1st console mai "This the line" show hoga then 
+        "this is the another line" show hoga then 2s ke bad 
+        "Inside SetTimeOut" show hoga. to isme asynchronously
+        code ka execution hua.
+        yaha setTimeOut mai jo ()=> arrow fun liya hai usko 
+        callback function bolate hai.
+        
+        */
+
+       /* console.log("This the line");
+        
+        setTimeout(()=>
+        {
+                 console.log("Inside SetTimeOut");  
+        },2000)
+        console.log("this is the another line");
+  
+        */
+
+        /*eg 2 :- use of caalback fun into callback fun
+        hete in o/p :- "Start"  , "Soham" , "End Line" then
+        "Inside SetTimeOut" */ 
+
+       /* console.log("Start");
+        function getName(name , callback)
+        {
+          setTimeout(()=>{          // 1st callback errow fun
+           console.log("Inside SetTimeOut")
+          },2000)
+          callback(name);
+          
+        }
+
+       const nm = getName("Soham" ,(nm)=>   // call back into callback
+       {
+          console.log(nm);
+       });
+       
+
+        console.log("End Line");
+
+        */
+
+
+    
+
+/* ye uper ka callback fun ka use karne se humara code complex ho 
+jata hai , to ye callback fun ka use na karke  hum promise concept ka
+ use karte hai.
+eg of promise :- yaha humne ek promise ka ek object create kiya
+then 2 fun as a parameter liya resolve , reject. then humne niche
+code ko produce kiya.(if & else mai) , uske bad hum ye code ko 
+consume karenge. uske liye hum then() method ka use karte hai. 
+here o/p mai  Request Success show hoga becoz req =true liya hai.
+ 
+note :- yaha req = true ya to req=false dono h case mai 
+finally() method ka code to execute hoga h hoga*/
+
+      /*  const promiseObj = new Promise((resolve , reject)=>
+        {
+              let req = true
+              if (req == true)
+              {
+               resolve("Request Success");
+              // resolve([1,2,3,4,5,6,78,9]);   // yaha resole mai ek array liya
+              }
+              else{
+               reject("Error Occured");
+              }
+             
+        }).then(
+          (value)=>{
+          console.log(value)
+          },    // for resolve the promise , isme resolve("Request Success") ayega
+          (error)=>{
+          console.log(error)     // for reject the promise , isme reject("Error Occured") ayega;
+          },
+          )   */
+
+
+
+          /* or we can write this error code in catch() & we also use finally(); */
+
+         /* }).then((value)=>{
+               console.log(value)},
+               ).catch((error)=>{
+              console.log(error)},
+              ).finally(() =>{
+                  console.log("Cleaned up")   // console mai ye to print hoga h hoga.
+              })     */ 
+          
+     </script>
+</body>
+</html>

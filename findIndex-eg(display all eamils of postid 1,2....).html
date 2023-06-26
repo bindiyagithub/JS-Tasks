@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comments Api</title>
+</head>
+<body>
+    <script>
+
+
+  /*  yaha humko postId= 1  & uske jitne bhi list of emails hoge 
+(it means array of email) wo display karvana hai. then postId=2 ,uske list
+of emails like this...... jitne bhi postId hoge uske sare list of email
+display karvana hai. to 1st of all yaha postId duplicate hai , to usko
+unique karne ke liye humne reduce() ka use kiya. */
+
+
+ fetch("https://jsonplaceholder.typicode.com/comments")
+        .then(y=>y.json()).then(y=> 
+        {
+            MergeArray(y)
+        })
+
+        function MergeArray(data)
+        {
+            let finalOutPut = data.reduce((pre,value)=>
+           {
+           
+                /* yaha humne ek obj banaya hai , jisme postId unique ho 
+                & wo her ek postId ke list of email show ho  isliye
+                humne postId name ki key li & usme value.postId store kiya,
+                listOfEmails name ki key li & usme [value.email]  store kiya*/
+           
+                let obj = 
+                {
+                    postId: value.postId,
+                    listOfEmails: [value.email] // list of email hai so [] liya
+                }
+
+               
+               let index = pre.findIndex((element)=> 
+                {
+                    return element.postId == value.postId;
+                });
+
+                
+
+                /* aget index < 0 hai to humko obj ko pre mai push karna hai.
+                  to postId 1 mai 1 obj push ho gaya , wo obj mai humko list
+                  of email bhi push karn ahai so use map()  */
+                if(index < 0)
+                {
+                    pre.push(obj);
+                }
+                else
+                {
+
+                    
+                    pre.map((a)=> {
+
+                        a.listOfEmails.push(value.email);
+
+                        return a;
+
+                    })
+
+
+                }
+
+                return pre;
+
+            },[]);
+
+
+            console.log(finalOutPut);
+
+        }    
+
+
+/* same as above yaha unique postId & uske sare list of body display karvana
+hai */
+
+
+/* fetch("https://jsonplaceholder.typicode.com/comments")
+        .then(y=>y.json()).then(y=> {
+            
+            MergeArray(y)
+        })
+
+        function MergeArray(data)
+        {
+       let finalOutPut =   data.reduce(function(pre,value){
+
+                let obj = {
+                    postId: value.postId,
+                    aryOfBody: [value.body]
+                }
+
+                let index = pre.findIndex((element)=> {
+
+                    return element.postId == value.postId;
+                })
+
+                if(index < 0)
+                {
+                    pre.push(obj);
+                }
+                else
+                {
+
+                    pre.map((a)=> {
+
+                        a.aryOfBody.push(value.body);
+
+                        return a;
+
+                    })
+
+
+                }
+
+                return pre;
+
+
+            },[]);
+
+
+            console.log(finalOutPut);
+
+        }   */
+      
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+

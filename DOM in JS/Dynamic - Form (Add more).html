@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <h2 class="text-center text-primary">
+          Basic Information
+          <button onclick="saveInfo()" class="btn btn-success m-2">DataSave
+        </button>
+        </h2>
+        
+    </div>
+    <div class="container mb-2">
+        <input type="text" name="fname" placeholder="F_Name" />
+        <input type="text" name="lname" placeholder="L_Name" />
+    </div>
+
+    <div id="education" class="container">  <!--parent div-->
+
+        
+        <div id="educationne" class="edu" >  <!-- child div -->
+               
+            <input type="text" name="uni" placeholder="Enter Univercity" />
+                
+            <input type="text" name="course"  placeholder="Enter Course"/>
+               
+            <input type="text" name="start" placeholder="Enter Starting date:" />
+               
+            <input type="text" name="end"  placeholder="Enter Ending date"/>
+               
+            <button onclick="addMoreEducation()">
+                 AddMore</button>
+           
+        </div>
+    </div>
+
+    
+</body>
+
+<script>
+
+function addMoreEducation()
+{
+    /* jiska id educationne ho usko cloneNode karna hai it means 
+    wo pure node ko copy karna hai, wo pura html node d name ke var
+     mai store hoga, then ye html Node per querySelectorAll() method 
+     chalayi ki usme jitne bhi input element hai wo lana hai.wo sare
+      input element ke data ko humne mynodes mai store kiya ,then humko ye educationne id vale
+    div mai ek button chahiye so createElement() ka use karke ek Delete
+     button create  kiya. */
+    let d = document.getElementById("educationne").cloneNode(true);
+
+    console.log(d);
+
+   let mynodes = d.querySelectorAll("input");
+
+   for(let i=0;i<mynodes.length;i++)
+   {
+    mynodes[i].value = "";
+   }
+
+    let button = document.createElement("button");
+    button.innerHTML = "Delete";
+    button.onclick = (event)=> { 
+                                removeData(event) 
+                               };
+                               
+
+    d.appendChild(button) /* jo uper d mai pura html node(jiska id educationne 
+    hai wo vala div ) usme ye button ko appindChild ker diya menas add ker
+    diya then niche jiska education id wo div node mai ye html data (jo d mai hai)
+    usko display karva diya */
+   document.getElementById("education").appendChild(d);
+
+}
+
+
+//////////////   for delete the row(data)  //////////////////////////
+
+/* yaha parentElement jiska id education hai wo vala div hai
+ usko target karke wo sare data jisme(uni,course,start,end)
+ ye sub field hai wo wale div ko remove() ki help se delete
+ kar sakte hai*/
+
+function removeData(event)
+{
+    event.target.parentElement.remove()
+}
+
+//////////////   save the fields data   /////////////////////////
+function saveInfo()
+{
+    let info= {}
+    let data = document.getElementById("education").querySelectorAll(".edu");
+
+    let education = [];
+    for(let j=0;j<data.length;j++)  // this loop is for education (for row)
+    {
+
+        let inputs = data[j].getElementsByTagName("input");
+        let obj = {};
+        for(let i=0;i<inputs.length;i++) // this loop is for education fields(for column)
+        {
+
+          if(inputs[i].type != "button")
+            {
+               obj[inputs[i].name] = inputs[i].value
+            }
+        }
+
+        education.push(obj);
+    }
+
+    info["education"] = education;
+
+    console.log(info);
+    
+}
+
+</script>
+</html>

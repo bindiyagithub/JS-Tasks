@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Crud in Localstorage1</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+</head>
+<body>
+      
+
+
+ <div class="row">
+    <div class="col-md-12 ms-2">
+        <form onsubmit="saveData(event)"> 
+
+            <input type="hidden" value="-1"  id="index"/>
+            
+            <label for="fname">Fname:</label>
+            <input type="text" name="fname" id="fname" placeholder="Enter Firstname" class="m-3" />
+            
+            <label for="lname">Lname:</label>
+            <input type="text" name="lname" id="lname" placeholder="Enter Lastname"  /> 
+       
+        <div>
+           <label for="address">Address:</label>
+           <input type="text" name ="street1" id = "street1" placeholder="Enter street1" />
+           <input type="text" name ="street2" id = "street2"  placeholder="Enter street2"/>
+           <label for="zipcode">Zipcode</label>
+               <input type="text"  id="txtZipcode"  placeholder="Enter Zipcode" maxlength="6"/>
+
+           <label for="city">City:</label>
+           <select name="city"  id="txtCity">
+               <option value="" class="dropdown-item">Select</option>
+               <option value="Vadodara" class="dropdown-item">Vadodara</option>
+               <option value="Ahemdabad" class="dropdown-item">Ahemdabad</option>
+               <option value="Bharuch" class="dropdown-item">Bharuch</option>
+           </select>
+
+           <label for="state" >State</label>
+              <select name="State" id="txtState">
+               <option value="" >Select</option>
+               <option value="Guajarat" class="dropdown-item">Guajarat</option>
+               <option value="M.P" class="dropdown-item">M.P</option>
+               <option value="Maharashtra" class="dropdown-item">Maharashtra</option>
+               </select>
+               <input type="submit" value="Save"  class="btn btn-danger m-2"/>
+
+          
+        </div>
+           
+           
+       
+       </form>
+    </div>
+
+</div>  
+   
+
+<!-- for display data in table form -->
+<div class="row ms-3">
+    <div class="col-md-8"> 
+         
+        <table id="display" class="table table-stripped table-bordered table-hover">
+
+        </table> 
+    </div>
+</div>  
+<input type="submit" value="Clear All" onclick="clearData()" 
+class="btn btn-danger m-2"/>
+
+ 
+
+ <script>
+
+
+       
+     function saveData(event)
+    {
+         event.preventDefault();
+
+         let myarray = JSON.parse(localStorage.getItem("user")) || [];
+
+         
+         
+            let item =  document.getElementById("index").value;
+
+            
+            if(item >= 0)
+            {
+                myarray[item].fname = document.getElementById("fname").value;
+                myarray[item].lname = document.getElementById("lname").value;
+                
+                myarray[item].address.street1 = document.getElementById("street1").value;
+                myarray[item].address.street2 = document.getElementById("street2").value;
+                myarray[item].address.txtZipcode = document.getElementById("txtZipcode").value;
+                myarray[item].address.txtCity = document.getElementById("txtCity").value;
+                myarray[item].address.txtState = document.getElementById("txtState").value;
+                
+            }
+            else
+            {
+               let myobj = 
+               {
+                   fname : document.getElementById("fname").value,
+                   lname: document.getElementById("lname").value,
+                   address : {
+                        street1 : document.getElementById("street1").value,
+                        street2: document.getElementById("street2").value,
+                        txtZipcode :document.getElementById("txtZipcode").value,
+                        txtCity :document.getElementById("txtCity").value,
+                        txtState : document.getElementById("txtState").value
+
+                    } 
+               }
+                myarray.push(myobj);   
+            }
+
+                  
+     // for edit the item 
+         document.getElementById("index").value = -1;
+
+         localStorage.setItem("user", JSON.stringify(myarray));         
+
+         display();  // for editData call display() fun
+     }
+    
+
+     display();      // for saveData call display() fun 
+
+
+       
+      
+
+      // for remove the data
+    function removeData(index)
+    {
+         let myarray = JSON.parse(localStorage.getItem("user")) || [];
+
+         myarray.splice(index,1);
+
+
+         localStorage.setItem("user", JSON.stringify(myarray));
+
+         display();  // for remove the data call display()
+    }
+
+    // for edit the data
+    function editData(index)
+    {
+         let myarray = JSON.parse(localStorage.getItem("user")) || [];
+
+         document.getElementById("fname").value =myarray[index].fname;
+         document.getElementById("lname").value  = myarray[index].lname;
+         
+         document.getElementById("street1").value = myarray[index].address.street1;
+         document.getElementById("street2").value = myarray[index].address.street2;
+         document.getElementById("txtZipcode").value = myarray[index].address.txtZipcode;
+         document.getElementById("txtCity").value = myarray[index].address.txtCity;
+         document.getElementById("txtState").value = myarray[index].address.txtState;
+         document.getElementById("index").value = index; /* yaha humne hidden vale input field mai index = 0 set ker diya
+                                                          humko localstorage mai karne ke liye hidden field lena padta hai.  */
+    }
+
+    
+     function display()
+     {
+         let myarray = JSON.parse(localStorage.getItem("user")) || [];
+
+         //console.log(myarray);
+
+         let myhtml = myarray.map((value,index)=> 
+         {
+
+             return (`<tbody><tr><td>${value.fname}</td>
+                          <td>${value.lname}</td>
+                          <td>${value.address.street1} , ${value.address.street2} ,
+                               ${value.address.txtZipcode} , ${value.address.txtCity} ,
+                               ${value.address.txtState}</td>
+                          
+                     <td><button onclick=removeData(${index}) 
+                        class ="btn btn-warning m-2">Delete</button>
+                        <button onclick=editData(${index}) 
+                        class = "btn btn-success ms-3">Edit</button></td>
+                    </tr></tbody>`)
+
+         });
+
+              myhtml.unshift(`<thead> <tr class="table-info text-center"><th> Fname </th>
+                                          <th> Lname </th>
+                                          <th> Address</th>
+                                          <th> Actions </th>
+                                          
+                                       </tr>
+                                       </thead>`)
+
+
+         document.getElementById("display").innerHTML = myhtml.join("");
+
+    }
+     display();   // bydefault display function call kiya 
+
+
+     // for clear all data define clearData() fun
+       function clearData()
+       {
+              localStorage.clear();
+              display();
+       }
+
+ </script>
+   
+</body>
+</html>

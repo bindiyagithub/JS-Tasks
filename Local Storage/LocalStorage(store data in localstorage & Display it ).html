@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>eg of LOcalStorage</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    <!-- yaha humne ek fname & lname ka input field liya & ek button 
+    liya. niche  data display hona chahiye. wo data ager hum page ko 
+    refresh kare to bhi jana nahi jana chahiye. as it is 
+    rahena h chahiye. to uske liye hum ye data localStorage mai
+    store karva sakte hai.-->
+    <label>Fname:</label>
+    <input type="text" value="" id="fname" />
+    <label>Lname:</label>
+    <input type="text" value="" id="lname" />
+
+    <label>Address:</label>
+    <input type="text" name ="address1" id = "address1"  placeholder="Address1"/>
+    <input type="text" name ="address2" id = "address2"  placeholder="Address2"/>
+
+
+    <input type="button" onclick="Save()" value="Save"/>
+
+      <div class="container">
+        <div class="row">
+            <div class="col-md-12 mt-2">
+                <table id ="display1" class="table table-bordered table-striped table-hover
+                table-sm">
+                
+            </table>
+            </div>
+        </div>
+      </div>
+    <script>
+    
+    function Save()
+    {
+        let firstname = document.getElementById("fname").value;
+        let lastname = document.getElementById("lname").value;
+
+        let address= {
+                address1 : document.getElementById("address1").value,
+                address2 : document.getElementById("address2").value
+            }
+        let myobj = 
+        {
+            fname : firstname,
+            lname: lastname,
+            address:address
+        }
+
+            let myarray= [];
+        
+
+               key                   value
+          employees      [{"fname":"Bindiya","lname":"Virani"}]
+          */
+            let d = JSON.parse(localStorage.getItem("employees"));
+
+            /* ye condition check karti hai k uper jo humne  d mai 
+            employees name ki key ko get karvaya hai wo key array mai hai
+             ki nahi, ager wo employees name ki key array mai nahi hai to 
+               (it means if(!Array.isArray(d)) )
+            myarray[] name ke blank array mai employeeName ke obj ko 
+            push karva de. then wo myarray mai jo value
+            ayi wo json(object) mai  hogi to usko hum string mai convert ker
+            denge then localStorage mai add ker denge.  is tarah.....
+            localStorage.setItem("employees", JSON.stringify(myarray));
+            to is tarah employeeName ka obj myarray name ke  blank array
+            mai add hota jayega...*/
+
+            if(!Array.isArray(d))
+            {
+
+                myarray.push(myobj);
+                localStorage.setItem("employees", JSON.stringify(myarray));
+
+            }
+            /* yaha else mai ye check karega ki d mai kuch hai k nahi,
+            ha ub d mai myarray ka data hai becoz myarray = d hai so..
+            wo dusra jo bhi again fname & lname (employeeName)dalte hai
+             wo data employees name ki key mai add ker denga */
+            else
+            {
+                myarray = d;
+                myarray.push(myobj);
+                localStorage.setItem("employees", JSON.stringify(myarray));
+				display();
+				
+
+            }
+
+    }
+	
+	// we display the data of local storage
+
+    function display()
+     {
+         let myarray = JSON.parse(localStorage.getItem("employees")) || [];
+
+         console.log(myarray);
+
+         let myhtml = myarray.map((value,index)=> 
+         {
+
+             return (`<tbody><tr class="p-2 text-center">
+                          <td>${value.fname}</td>
+                          <td>${value.lname}</td>
+                          <td>${value.address.address1} , ${value.address.address2}</td>
+                          
+                          <td><button onclick=removeItem(${index}) 
+                          class ="btn btn-warning m-2">Delete</button>
+
+                          <button onclick=editData(${index}) 
+                          class = "btn btn-success">Edit</button></td>
+                        </tr></tbody>`)
+
+         }).join(" ");
+
+
+         document.getElementById("display1").innerHTML = myhtml;
+
+    }
+     display();  
+	
+    </script>
+</body>
+</html>

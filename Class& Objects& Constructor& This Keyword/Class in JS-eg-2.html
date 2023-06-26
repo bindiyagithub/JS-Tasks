@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class eg</title>
+</head>
+<body>
+
+    <button name="test" id="btn">DisplayInformation</button>
+     
+    <script>
+
+/* yaha humne ek DisplayInformation name ka class banaya.
+    isko oops concept ka encapsulation bolate hai.
+
+yaha niche display name ka normal fun ka parent button hoga, 
+ becoz ye function ko humne button mai call kiya hai so. 
+ button mai name = "test" liya hai so ye fun wo this ki value ko
+ refer karega.so yaha this.name = "Mahadev" nahi show hoga. 
+ this.name = "test"  show hoga.   suppose button mai humne name
+ property h nahi li hoti to ye normal fun kisi ka bhi this.name
+ nahi layega, it means o/p mai blank space display hogi.
+ 
+ then yaha niche arrow fun ka parent bhi class hai so wo class ke 
+ this ki value h refer karega. this.name = "Mahadev".
+ 
+ then uske bad humne class ke ander define ki hui sub chiz ko
+(sub chiz menas property & methods) access karne ke liye humne
+class ka ek object banaya , yaha d class ka object hai.
+for eg name property & display() method, constructor() method. 
+
+ager humko uper body mai jo button banaya hai usme onclick event use 
+nahi karni hai to hum yaha document mai bhi  add ker sakte hai.
+yaha button mai liya hua btn name ka id liya then (.addEventListener) 
+then ko add ker diya then "click" event fire ki then display() fun ko 
+object ke sath call kiya.
+      
+note:- jub bhi hum is tarah document ke ander koi bhi onclick event 
+ka use karte hai tub only click h likhana hai & () nahi dena hai, 
+& function call karte hai usme bhi () ko nahi dena hai. 
+("click",d.display) is tarah..... likana hai*/
+
+     class DisplayInfomration
+     {
+
+            name = "Mahadev";
+
+        //   constructor()
+        //   {
+        //      this.display = this.display.bind(this);
+        //   }
+
+          display()   
+          {
+               console.log(this.name);    // o/p = this.name = "test"  
+          }
+
+
+          arrow = ()=>
+          {
+             console.log(this.name);   // o/p = this.name = "Mahadev"
+          }
+
+
+     }
+
+     let d = new DisplayInfomration();
+     d.arrow();  // yaha object ke sath arrow fun ko call kiya so o/p = "Mahadev"
+
+     document.getElementById("btn").addEventListener("click",d.display);
+
+/* yaha normal fun & arrow fun dono ke this ki value alag alag
+disaply ho rahi hai.  ager class ke this k value refer karni hai
+to constructor method mai ye display fun ke this ko bind karva dena
+hai so new fun return hoga , jo current (yaha current class hai)
+ ke this ki value ko refer karega , jo uper humne constructor mai 
+ kiya hai is tarah.comment  wala code.....*/
+
+
+//////////////////////////////////////////////////////////////////////
+
+/*  differebce between arrow function & normal function.
+arrow function do not have their own this, arrow function use this of
+any object or any function. in arrow function , this means parent. 
+ wheares the parent of noraml function is
+jo bhi usko call karwata hai wo hoga. yaha uper normal fun
+ko button mai call hota hai to wo button uska parent hua. so 
+button mai  this property li hai  uski value refer karega.
+*/
+   </script>
+
+</body>
+</html>

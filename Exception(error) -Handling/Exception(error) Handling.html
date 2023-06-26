@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>error handling</title>
+</head>
+<body>
+   <!-- in javascript exception handling & error handling both 
+concept are same , bt in another language for eg in java both
+concepts are different.
+For exception handling :- we use try , catch , finally , throw -->
+
+
+
+<script>
+     
+     
+     
+     
+
+     try{
+          add();
+          console.log("try block");
+     }
+     catch(e){
+          /*e.name error ka type disaply karega &yaha e.message kon 
+          si error hai wo display karega. */ 
+          console.log(e.name);   // o/p = ReferenceError         
+          console.log(e.message);   // o/p = add is not defined
+          
+          
+          
+                                        
+     console.log("here  add() function is not defined"); /* ye console
+                                                  mai show ho jayega */
+     }
+     finally{
+          console.log("file uploaded");  // ye code console mai run ho jayega
+     }
+
+
+/* eg of throw in try & catch :- hum error ko throw karvake 
+bhi error ko handle ker sakte hai.  custom error  ke liye
+throw ka use hota hai.*/  
+
+/*  yaha humne ek fun banaya , usko try block mai call kiya then 
+function ke ander ek condition li, a>b ager ye condition true hui
+to if vala part chalega.jisme humne throw "b is subtracted from a" 
+liya hai. yaha try & catch vala code run nahi ho raha hai. 
+jo error generate hoti hai wo directly humne browser pe throw ker 
+di.    */
+     function ErrorHandling(a , b)
+     {
+          if(a>b)
+          {
+             throw "b is subtracted from a";
+          }
+     }
+     try{
+          ErrorHandling(30 , 15);
+     }
+     catch(e){
+        console.log(e);
+     }
+
+     
+</script>
+</body>
+</html>

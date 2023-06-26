@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+     <p id ="NumDevidedby10"></p>
+
+    <h4 id ="MyNums"></h4>
+  
+    <input type="text" class="col-4 m-2" id="searchTerm"  
+    onchange="myFilter()"/>
+    <ul id="display"></ul>
+    
+    <script>
+
+  /*  filter() :- filter method ek new array return karta hai. bt wo array
+  ki size same ho bhi sakti hai nahi ho bhi sakti hai. it return an array.
+  The filter() method does not change (Modify) the original array. */
+  
+  
+   
+   /*  let ar = [10,207,30,405,100,205,340,200,50];
+       let newNum =  ar.filter((f)=>{
+           
+          return f % 10 == 0
+
+        })
+        console.log(newNum);
+     document.getElementById("NumDevidedby10").innerHTML = newNum; */
+
+
+
+   /* niche humne jo myNumber name ka array liya hai. usme se positive no. 
+  nikalna hai. to yaha humne ek mypostiveNumber name ka var liya usme 
+  filter fun use kiya. usme humne yaha v >= 0 return kiya, it means
+  0 se jitni big value hogi wo console mai show hogi.  */
+
+       let myNumber1 = [4,5,6,7,8,-1,-2,-3,-4,0];
+        let mypostiveNumber = myNumber1.filter((v)=>
+        {
+
+                return v >= 0;
+        });
+ 
+         // console.log(mypostiveNumber);
+         // document.getElementById("MyNums").innerHTML = mypostiveNumber;   
+
+     
+      
+      
+      
+  /* yaha humne ek display name ka fun banya. ubhi ye fun mai humne
+    data name ka parameter liya, kyuki hum textbox mai jo bhi 
+    value search karenge wo fix nahi hogi. flexible value hogi so
+    jo bhi value dalenge wo data name ke para. mai jaker store honi chahiye
+     then humne yaha ye function mai map method ka use karke wo value ko
+     <li> mai return karvaya. then usko display karvaya. then 
+      display() fun ko bar call kiya usme myNumber name ka pura array 
+      display ho jayega*/
+
+      let myNumber = [4,5,6,7,8,9,10,11,12,1,-2,-3,-4,0];
+      function display(data)
+      {
+
+        //console.log(data);
+          
+        let htmlnumber = data.map((value)=>
+        {
+
+               return `<li>${value}</li>`
+
+        });
+      document.getElementById("display").innerHTML = htmlnumber.join(" ")
+      }
+      
+      display(myNumber);    // ye myNumber name ke var ke all no. display karega
+      
+
+
+/* ub humko ek search box lena hai. then wo search box mai jo bhi
+number likhenge uske according  positive no. ka filter hona chahoye
+(myNumber  name ke array ke numbers) . to ye akrne ke liye humne uper
+ek textbox liya hai usme humne onchange() event lagayi. jub bhi ye 
+textbox per no.likhe tub ye event fire honi chahiye. to suke liye humne
+ek myFilter name ka fun banaya. then wo function mai ek allValue name
+ ka var liya. usme textbox mai jo value search karege wo display ho jayegi
+ so let searchValue = document.getElementById("searchTerm").value; ye liya.
+ now ye textbox mai value ane ke bad usko filter karvana padega so
+ humne jo mypostiveNumber name ka var leker kiya hai wo ayega then return
+ value >=searchValue liya it means searchvalue mai jo bhi value search
+ karenge usse big value hogi wo display ho jayegi. then jo filter hue
+ numbers hai usko <li> mai disaply karvana hai so uske liye ek display
+  name ka fun banaya then usme map() ka logic liya niche.......
+  yaha muFilter() fun mai bhi humne display(mypostiveNumber) ko call 
+  karvaya. wo fun jo bhi value textbox mai search karege usse big 
+  value display karke dega.
+ */
+ 
+    function myFilter()
+    {
+      let searchValue = document.getElementById("searchTerm").value;
+      let mypostiveNumber = myNumber.filter((value)=>
+      {
+
+        return value >= searchValue;
+        
+      });
+      console.log(mypostiveNumber);
+      
+    display(mypostiveNumber); 
+
+    }
+ 
+ 
+
+ /* find() :- filter()  function ki return type array hai. wo filter hoke
+ pura array of object deta hai. bt humko wo array ke object mai se koi 
+ ek h element(for eg user id) per filter karvana hai tub hum find()
+ function ka use karte hai. find() function jo bhi pahela element metch hoga
+ wo h object ki value return ker dega.
+ 
+ it means filter() ka result ek new array hota hai. & find() ka result
+ wo array ka only one object(jo 1st metch ho jayega wo h) hota hai*/
+</script>
+
+</body>
+</html>

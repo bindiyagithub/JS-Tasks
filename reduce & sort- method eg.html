@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+const products = [
+  {
+    id: 'rec43w3ipXvP28vog',
+    title: 'high-back bench',
+    company: 'ikea',
+    image:
+      'https://dl.airtable.com/.attachments/14ac9e946e1a02eb9ce7d632c83f742f/4fd98e64/product-1.jpeg',
+    price: 9.99,
+  },
+  {
+    id: 'rec4f2RIftFCb7aHh',
+    title: 'albany table',
+    company: 'marcos',
+    image:
+      'https://dl.airtable.com/.attachments/f3450755e165557344f7d6433242431e/93533098/product-1.jpeg',
+    price: 79.99,
+  },
+  {
+    id: 'rec8kkCmSiMkbkiko',
+    title: 'accent chair',
+    company: 'caressa',
+    image:
+      'https://dl.airtable.com/.attachments/f292eaec4fea8a791b037c759ae559c9/2d5e34d5/product-4.jpeg',
+    price: 25.99,
+  },
+  {
+    id: 'recBohCqQsot4Q4II',
+    title: 'wooden table',
+    company: 'caressa',
+    image:
+      'https://dl.airtable.com/.attachments/5b3ad76dfd6ca5e31810cb99141c7ede/69829b2f/pexels-dominika-roseclay-1139785.jpg',
+    price: 45.99,
+  },
+  {
+    id: 'recDG1JRZnbpRHpoy',
+    title: 'dining table',
+    company: 'caressa',
+    image:
+      'https://dl.airtable.com/.attachments/06bbede65bd09196b4a81a8e7b59e683/8af0aeb5/product-8.jpg',
+    price: 6.99,
+  },
+  {
+    id: 'recNWGyP7kjFhSqw3',
+    title: 'sofa set',
+    company: 'liddy',
+    image:
+      'https://dl.airtable.com/.attachments/443aa7884207dae7c3cc127262a2f993/d4f33110/product-1.jpeg',
+    price: 69.99,
+  },
+  {
+    id: 'recZEougL5bbY4AEx',
+    title: 'modern bookshelf',
+    company: 'marcos',
+    image:
+      'https://dl.airtable.com/.attachments/a889b1928b134c2ca0b5bbca32ea9abf/65c8a9a6/product-7.jpg',
+    price: 8.99,
+  },
+  {
+    id: 'recjMK1jgTb2ld7sv',
+    title: 'emperor bed',
+    company: 'liddy',
+    image:
+      'https://dl.airtable.com/.attachments/10fdf29ae17f2d1f98770ae42584d021/82b9403f/product-6.jpg',
+    price: 21.99,
+  },
+  {
+    id: 'recmg2a1ctaEJNZhu',
+    title: 'utopia sofa',
+    company: 'marcos',
+    image:
+      'https://dl.airtable.com/.attachments/6ac7f7b55d505057317534722e5a9f03/9183491e/product-3.jpg',
+    price: 39.95,
+  },
+  {
+    id: 'recvKMNR3YFw0bEt3',
+    title: 'entertainment center',
+    company: 'liddy',
+    image:
+      'https://dl.airtable.com/.attachments/da5e17fd71f50578d525dd5f596e407e/d5e88ac8/product-2.jpg',
+    price: 29.98,
+  },
+  {
+    id: 'recxaXFy5IW539sgM',
+    title: 'albany sectional',
+    company: 'ikea',
+    image:
+      'https://dl.airtable.com/.attachments/05ecddf7ac8d581ecc3f7922415e7907/a4242abc/product-1.jpeg',
+    price: 10.99,
+  },
+  {
+    id: 'recyqtRglGNGtO4Q5',
+    title: 'leather sofa',
+    company: 'liddy',
+    image:
+      'https://dl.airtable.com/.attachments/3245c726ee77d73702ba8c3310639727/f000842b/product-5.jpg',
+    price: 9.99,
+  },
+];
+
+
+     /* let mycities = ["Vadodara","Vadodara","Pune","Bangloor"];
+
+      let d = mycities.push("Pune");
+      console.log(d);   // it shows the new array length = 5
+
+     */
+
+      /* includes() :-   This function used for find (search) an element
+       from an array. if element is in an array it return true. 
+      it element is not there so it return false. */
+
+     /*
+     // for eg:-
+      let mycities = ["Vadodara","Vadodara","Pune","Bangloor"];
+      let q = mycities.includes("Pune");
+        
+      console.log(mycities.includes("Pune")); // it return true  */
+       
+    
+      /* here we use reduce() method :- ye method ka use suppose humare
+      array mai koi value repeat ho rahi gai(duplicate value) usko
+      ye method ki help se remove ker sakte hai. it means ye method ek 
+      value return karta haijese map() method &
+      filter method mai 3 parameters hote hai (value , INdex , array)  . 
+      wese h reduce method mai 4 paremeters hote hai. 
+      (prevalue , value , INdex , array) .
+      yaha humne reduce() mai prevalue [] blank array dala hai. then 
+      it means array ko hum check karte hai ki uske ander current value
+      hai k nahi, yaha previous element blank hai so  current value mai 
+      kuch nahi hoga. so yaha includes(value) false return karega. kyuki
+      (value search hogi h nahi , array blank hai so)... so yaha if mai
+      false==false hua. it means condition true hui. so prevalue.push chalega
+      so vaha "Vadodara" push karke dega. then  ye prevalue ko humne baher 
+      return kiya so array mai vadodara gaya. ub yaha prevalue mai 
+      vadodara hai & include(value) search karega k vadodara hai k nahi.
+      to hai so condition true hui. so yaha true==false hua. so altimately
+      condition false hui so prevalye.puch() nahi chalega.so yaha dusara 
+      vadodara remove ho gaya kyuki. so abhi bhi previous value vadodara h 
+      hai , now prevalue=vadodara & currentvalue=Pune so include() search
+      karega k vadodara ke ander pune hai? nahi hai so condition 
+      false == false so statement ture hua & prevalue.push() chala & humari
+      current value Pune array mai add ho jayegi. now prevalue = "Pune" hai
+      & current value ="Banglore" hai so include() search karega ki pune
+      ke ander banglore hai k nahi? yaha nahi hai so condition false hui
+      so false == false hua so statement chala & prevalue mai Banglure
+      push ho gaya.  
+
+          */
+
+let mycities = ["Vadodara","Vadodara","Pune","Bangloor"];
+let output = mycities.reduce((prevalue , value , Index ,array)=>
+        {
+
+            if(prevalue.includes(value) == false)
+            {
+                prevalue.push(value);
+            }
+            
+            return prevalue;
+        },[])
+
+            console.log(output); 
+
+    /* reduceRight method :- jo humko koi bhi product list ko reverse
+    order mai display karvan ahai to use reverseRight().
+    here o/p = Mumbai , Bangloor , Pune , vadodara */
+
+  /*     let mycities1 = ["Vadodara","Vadodara","Pune","Bangloor", "Pune" ,"Mumbai" , "Bangloor","Mumbai"];
+    let reverseCity = mycities1.reduceRight(function(prevalue,value,index,array){
+
+          if(prevalue.includes(value) == false)
+          {
+              prevalue.push(value);
+          }
+
+            return prevalue;
+        },[])
+
+        console.log(reverseCity);    */
+
+
+        
+
+       
+// sort() method :- this method alphabatically sort an array. 
+       let mynumber = ["vadodara","test","d","pqr","pqrs","p","pq"];
+
+         sortValue = mynumber.sort((val1,val2)=>
+         {
+
+               if(val1 == val2){
+                if(val1.length > val2.length)
+                {
+                  return 1;  
+                }
+                else 
+                {
+                  return -1;
+                }
+              }else if(val1 > val2)
+              {
+                   return 1;
+              }
+              else
+              {
+                return -1;
+              }
+               
+            });
+
+           console.log(sortValue);
+
+   /* eg 2:-  .so 
+this method modifies an original array. here o/p = 10,12,1212,122,2,20,277,
+333,34,4,40,43,455,46. 
+*/
+let num = [2, 333, 12, 43, 122, 34, 455, 4,1212, 46, 277, 20 , 10,40];
+console.log(num.sort());        
+
+           
+    </script>
+    
+</body>
+</html>

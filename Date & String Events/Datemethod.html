@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="demo"></p>
+    <script>
+
+/*    const event = new Date(Date.UTC(2012, 11, 20, 3, 0, 0));
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+console.log(event.toLocaleDateString('de-DE', options));
+// Expected output (varies according to local timezone): Donnerstag, 20. Dezember 2012
+
+console.log(event.toLocaleDateString('ar-EG', options));
+// Expected output (varies according to local timezone): الخميس، ٢٠ ديسمبر، ٢٠١٢
+
+console.log(event.toLocaleDateString(undefined, options));
+// Expected output (varies according to local timezone and default locale): Th
+
+*/
+
+
+/* Date objects are created with the new Date() constructor. 
+yaha value.date means api mai se date nikalker dega.   */
+ 
+/*  fetch("https://fakestoreapi.com/carts").then(y=>y.json()).then(y=> 
+{
+
+    y.map((value)=> 
+     {
+         let mydate= new Date(value.date);
+               
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+           //console.log(mydate); 
+          console.log(mydate.toLocaleDateString('hi-IN', options));
+              
+            })
+
+        
+})  */
+
+
+/* eg 2 */
+
+fetch("https://jsonplaceholder.typicode.com/comments").then(y=>y.json())
+.then(y=> 
+{
+
+const options = { 
+    weekday: 'long',
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric'
+    }
+
+// const options = {  year: 'numeric', month: 'long',}
+let t = y.map((val,index)=> {
+
+    let obj = val;
+
+    obj["date"] = new Date(2023,03,index).toLocaleDateString("hi-In", options);
+
+        return obj;
+
+});
+
+
+console.log(t);
+
+});
+
+
+
+/* ager date ko string mai convert karni hai to.
+Convert a date to a string using the ISO standard: use toISOString()
+method */
+
+ let a =  d.toISOString();
+ document.getElementById("demo").innerHTML = a;
+</script>
+
+</body>
+</html>
+
+
+
+

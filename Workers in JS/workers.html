@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Web Workers API</h2>
+<p>Count numbers: 
+  <output id="result"></output>
+</p>
+<button onclick="startWorker()">Start Worker</button> 
+<button onclick="stopWorker()">Stop Worker</button>
+
+<script>
+
+  /* Humari web application mai kuch ese code hote hai wo run hone mai 
+  zyada time lete hai. to ese code ko hum background mai shift ker 
+  sakte hai.
+•	This Api is provided by browser.
+
+•	Web workers means your code will be run in the background script, 
+It means humara code background mai run(chalta raheta hai) hota hai.
+
+•	We can create a worker object using constructor Worker().
+•	For eg :- let workerObj = new Worker(‘workers.js’);
+
+•	Isme hum 2 method ka use karte hai. onMessage() , postMessage().
+•	onMessage() method humko jo msg aya he uske liye use hoti hai & 
+postMessage() method humko jo bhi msg send karna hai uske liye hoti hai.
+
+•	Advantages :- workers helps in complex computing. It means humara jo bhi
+ complex code hota hai usme help karta hai.
+
+•	It does not block the UI , it means humari Ui ko block nahi karta hai.
+•	Disadvantages :- wo do not access Parent object , Window object ,
+ Document object.
+ */
+let w;
+
+function startWorker() 
+{
+  if(typeof(w) == "undefined") 
+  {
+    w = new Worker("workers.js");
+  }
+  w.onMessage = function(event) {
+    document.getElementById("result").innerHTML = event.data;
+  };
+}
+
+function stopWorker() 
+{ 
+  w.terminate();
+  w = undefined;
+}
+</script>
+
+</body>
+</html>

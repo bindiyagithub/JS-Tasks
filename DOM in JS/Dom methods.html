@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>dom Form methods </title>
+</head>
+<body>
+     <!-- 1. DOM form methods-->
+     
+    <form name ="myform" id  ="frm">
+    <label>UserName:</label>
+    <input type ="text" name ="username"/><br><br>
+
+    <label>Password:</label> 
+    <input type ="password" name ="password"/> <br><br>
+
+     
+    <input type ="button" name ="reset_button"
+     value="Reset" onclick="resetForm()"/> <br><br>  
+    </form>
+   
+
+     <script>
+          /* use of document.froms :- for access the form,
+          it shows above form in console
+          */
+        let f =   document.forms["myform"];
+        console.log(f);
+        console.log(f.length);  // here o/p = 3 
+        console.log(f.elements[0]); /* form ka her ek element index ke sath 
+                                      display hoga, yaha 1st username vala field milega  */
+     
+         console.log(f.method);  // o/p = get (bydefault get hoti hai)
+         console.log(f.action);   /*ye form ki url link show karega jo page
+                                      per ye form hai.  */
+
+          
+          function resetForm(){
+               f.reset();
+          }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>error handling eg</title>
+</head>
+<body>
+     <!-- <input type="text" id ="demo" />
+     <input type="button" value="Text Input" onclick="myErrrorHandle()" />
+     <p id = "demo1"></p> -->
+
+     <input id="demo" type="text">
+<button type="button" onclick="myerrrorfunction()">Test Input</button>
+<p id="demo1"></p>
+</body>
+
+<script>
+     
+
+function myerrrorfunction(){
+        const para= document.getElementById("demo1");
+
+     /* yaha koi msg (para) ho ke na ho bydefault usko blank kar diya */
+        para.innerHTML = "";
+
+        let text = document.getElementById("demo").value;
+     try{
+         
+          text = Number(text);
+          if(text == "") throw "empty";
+          
+          if(isNaN(text)) throw "not a number";
+     
+          if(text < 5) throw "too low";
+           
+          if(text > 10) throw "too high";
+          
+          
+     }
+     catch(e){
+          para.innerHTML = "Input is :"  +" "+ e;
+     }
+ }
+
+/* real eg of try , catch & finally with an api. 
+yaha humne ek function define kiya , jisme try block mai ek 
+api li jisme kuch bhi data nahi hai. usme ek if condition li ,ager
+wo condition true hai to if ka part chalega jisme humne custom 
+error ko throw karvaya hai. then catch block ka code execute hoga
+& funally ka to hoga h hoga.  then finally ke bad jitne bhi code hoge
+wo sare execute hoge h */
+function convertToLowerCase()
+{
+
+          try
+          {
+             fetch("https://jsonplaceholder.typicode.com/albums1")
+             .then(y=>y.json())
+             .then(y=> 
+              {
+                  /*  yaha humko api mai se data mila nahi hai
+                  to humko yaha custom error ko handle karna hai, to 
+                  throw ka use kiya. */
+                    if(Object.keys(y).length == 0)
+                    {
+                    throw Error("This is the error");
+
+                    }
+               })
+               .catch(y=> 
+               {
+                  console.log("this is the react JS");
+               })
+          }
+          catch(err)
+            {
+                 /* err ke 2 type ke object hai. name & message
+                 message kon si error hai wo show karega & name
+                 kon si type ki error hai wo shoe karega */
+                console.log("err.name");  
+                console.log("err. message");
+            }
+
+            finally
+            {
+               console.log("This will cleanup the data");
+            }
+
+            console.log("This is the javascript");
+
+}
+convertToLowerCase();
+     
+</script>
+</html>

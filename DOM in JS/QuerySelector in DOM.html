@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Query Selector</title>
+</head>
+<body>
+     <h2 class="intro">Heading1</h2>
+     <div id="div1">
+          <p class="intro">Para 1</p>
+          <h2 class="intro">Heading 2</h2>
+          <p>Para 2</p>
+          <p class="intro">Para 3</p>
+          <h2>Heading 3</h2>
+     </div>
+
+     <div id="show2">I m something</div>
+     <p class="greek">Javascript Language</p>
+     <script>
+     /* querySelector() :- Dom ka ye function jo pahela condition 
+     satishfied karta hua selector milega wo h o/p mai dega
+     yaha o/p mai pahela <p> ka class intro hai to wo match hua
+     jismai Para1 hai uski jagah hello ker dega  */
+
+       /* class selector eg
+        let a = document.querySelector("p.intro");
+        a.innerHTML = "Hello";
+        console.log(a);  */
+
+        //eg2
+
+       /* let a = document.querySelector(".intro");  // jo pahela intro class milega usme "Hello" ho jayega
+        a.innerHTML = "Hello";
+        console.log(a);  */
+
+        /* element selector
+
+        let a = document.querySelector("div" , "p");
+        a.innerHTML = "Hello";
+        console.log(a);  */
+
+       /* attribute selector :- esa div jisme id attribute hona chahiye
+       let a = document.querySelector("div[id]");
+        a.innerHTML = "Hello";
+        console.log(a);
+        
+        // eg 2  :- esa div jisme id attribute show2 hona chahiye
+        let a = document.querySelector("div[id='show2']");
+        a.innerHTML = "Hello";
+        console.log(a);
+        */
+
+/* querySelectorAll() :- ager humko sara condition satishfied
+        karata hua element chahiye to ye fun use karte hai. 
+        to ye element ka collection (array) ho gaya, to uske liye
+        for loop ka use karna padta hai.
+        to yaha jitne  element mai intro hoga wo sare mai "Mahadev"
+          display ho jayega
+        */
+       let elem = document.querySelectorAll(".intro")
+     // let elem = document.querySelectorAll("h2" , "#show2") // sare <h2> mai mahadev ho jayega
+     // let elem = document.querySelectorAll("h2 , p" , ".greek") 
+                 /* sare <h2> & <p> mai mahadev ho jayega & jiska class
+                    greek hai wo sare bhi Mahadev ho jayega
+          
+                                                       */
+          
+
+       for( let i = 0; i< elem.length ; i++){
+          elem[i].innerHTML = "Mahadev";
+       }
+       console.log(elem);
+       
+      
+
+
+           
+     </script>
+</body>
+</html>

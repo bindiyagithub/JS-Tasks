@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>for of loop</title>
+
+     <style>
+      .d
+      {
+          width: 100%;
+      }
+      
+  </style>
+
+</head>
+<body>
+  
+
+<table id="mydisplay"> </table>
+<p id="demo"></p>
+     <script>
+/* 
+ & for in loop generally hum object per apply karte hai. jub bhi humko
+ object ki  dynamic key ki value get karna hai ya key ki 
+ value display karvani hai tub forin loop ka use hota hai. 
+ this loop is used on an object.yaha name,age,city,email ye sub
+  object ki key hai.
+
+  
+  for eg 1:-   for in loop used with an normal object. 
+is tarah hum for in loop ki help se object ko iterate ker sakte hai.
+  */
+  
+  
+ /* let obj = {
+    
+    name : "Hiren",
+    age : 34,
+    city : "Rajkot",
+    email : "hrn@gmail.com"
+ };
+ 
+       
+
+for(let key in obj){   // this for in loop print all object properties.
+ 
+ 
+  console.log(obj[key]);// here all value of obj store in key.
+}
+
+ */ 
+ 
+
+/* eg 2:- now use of api , display an objects (json) in table form 
+using for in loop. */ 
+
+fetch("https://jsonplaceholder.typicode.com/comments").
+then(y=>y.json()).then(y=> 
+{
+
+       displayInformation(y);
+
+})
+
+function displayInformation(data)
+{
+
+    let mapdata = data.map((objValue,index)=> 
+    {
+        
+
+/* yaha humne jo api hai uske sare objects ko table form mai display 
+karne ke liye for in loop ka use kiya. jub humara index = 0 hoga tub 
+    th += `<th>${key}</th>` means humara all <th> add hoga
+    & dis += `<td>${element[key]}</td>` it means uski value (means <td>)
+     bhi add hoga.  ager index= 0 nahi hai to else part chalega
+      dis += `<td>${value[key]}</td>` it means data to display
+      hoga h hoga.  */ 
+
+/* ye <tr> humne table heading<th> ke liye use ki hai.
+    yaha  ye <tr> humne th name ke var mai assign kiya */
+                
+    let th = '<tr class="d">'
+        
+/* ye <tr> humne table data <td> ko display karvane ke liye
+    use ki hai , yaha ye <tr> humne dis name ke var mai assign
+    kiya */
+                
+    let dis ='<tr>'
+
+        for (const key in objValue) 
+        {
+          
+            
+            if(index == 0)
+            {
+               
+               th += `<th>${key}</th>` // all <th> mai key add hogi
+               dis += `<td>${objValue[key]}</td>`  // all <td> means add hoga
+                
+            }
+            else
+            {
+                dis += `<td>${objValue[key]}</td>` 
+            }
+        }
+
+    dis += '</tr>';   // yaha upar dis var mai jo <tr> liya tha wo clise kiya
+
+    th += '</tr>';    // yaha humne jo th var mai <tr> liya usko close kiya 
+        
+        
+    return  th  + dis;  // yaha th & dis var ko return kiya then niche display kiya
+    
+
+    })
+
+    console.log(mapdata.join(" "));
+    document.getElementById("mydisplay").innerHTML = mapdata.join("");
+}
+
+
+/* convert object into array using for in loop */
+
+let mydata = {
+            firstName : "test",
+            lastName : "patel",
+            
+        }
+
+        let t = new Map();
+
+        
+
+        /* yaha key/value pair ko dynamic rakhne ke liye
+        for in loop li hai */
+        for (const key in mydata) 
+        {
+         t.set(key,mydata[key]);
+          
+        }
+
+    console.log(t);
+
+        
+
+
+
+
+
+/*  hum for in loop string per bhi apply ker sakte hai.
+ for in loop used with an string . yaha ye string ka her ek charactor 
+& space sub ek ek karke dispaly hoga.
+is tarah hum for in loop ki help se string ko iterate ker sakte hai.*/
+
+ 
+  /*   let myString = "Hi I m Bindiya Vadodariya.";
+       for(let char in myString){
+         console.log(myString[char]);
+     
+      }				
+
+   */
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+/* for of loop :- ye loop generally hum array or string per h apply 
+karte hai. 
+it means map() & for of dono hum array per h apply hote hai. map() fun 
+   new array ko return karta hai. bt jub bhi humko koi condition
+ base per array ko display karvana hai tub for of ka use kiya 
+ jata hai.   */
+ 
+ 
+
+ /* yaha humne array ke uper map method ka use kiya hai. iterating 
+ an array using map(). ager hum iski jagah for of loop ka use kare,
+ to -34 display hoga & baki sare no. undefined show nahi honge. */
+
+  let myarray = [-34,44,55,12,23,10];
+     
+
+  /*  let output= myarray.map((v)=> {
+
+            if(v<0)
+            {
+
+                return v;
+            }
+
+        });
+
+        console.log(output);   // yaha o/p mao only 34 show hoga then baki sare no. undefined show hoge 
+        
+*/
+
+
+/* hum normal for loop ka use ker ke bhi array ko iterate ker 
+sakte hai 
+ 
+for(i = 0; i<myarray.length ; i++){
+     console.log(myarray[i]); // ye only array ki value get ker ke dega
+ }
+
+*/
+ 
+
+/* now iterating an array using for of loop. yaha o/p mai array ki 
+all values display hogi . yaha uper ki normal for loop & 
+for of loop dono mai o/p same h display hoga 
+
+
+for(let n of myarray){
+  console.log(n);   
+}
+
+*/
+
+/* ager hum yahi eg mai for in loop ka use kre to o/p mai array ki
+index show hogi. ya o/p = 0,1,2,3,4,5 ye show hoga 
+
+for(let n in myarray){
+  console.log(n);   
+}
+  
+*/
+
+/* The forEach() method calls a function once for each 
+array element. */
+ let txt = "";
+  let numbers = [45, 4, 9, 16, 25];
+  numbers.forEach(myFunction);
+  document.getElementById("demo").innerHTML = txt;
+
+function myFunction(value) {
+  txt = txt + value + "<br>"; 
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+</head>
+<body>
+     <!-- append child node-->
+    <div id ="myId">
+     <h1 id ="myh1"> hello</h1>
+    </div>
+
+    <section id="s1">
+
+    </section>
+
+    <!-- for create an element & then append the child-->
+
+    <div id ="d1">
+     <h1>We are learning DOM Object</h1>
+     <h1> Python Javascript</h1>
+    </div>
+
+    
+
+    <script>
+     /* 2. Dom Creating Nodes :- createElement() used for create
+an element node in our document.
+createTextNode() :- for create the text node
+*/
+ 
+let c = document.createElement("h4");
+       console.log(c);  // yaha uper body mai <h4> element create karega
+
+ /* 3. Dom append child node :- it is used for append(add) a
+ node to the end of the childeren list . it means 
+ node child ke list ke end me jaker append hoga
+ yaha <h1> jo body mai div mai diya hai wo <section> mai
+          add ho jayega */
+
+        // eg 1  
+    /* let sec = document.getElementById("s1");
+     let h1tag = document.getElementById("myh1");
+ 
+     sec.appendChild(myh1);  
+     console.log(sec);  // yaha <section> mai <h1> tag append ho gaya
+     console.log(myId); // yaha <div> mai se <h1> remove hoker <section> mai append ho gaya
+     
+    */
+
+    /* eg 2 now create an element then appent the child
+    h2 element node create karne ke bad  humko d1 id vale div
+mai isko apeend karna hai to usko target karenge then
+wo div mai <h2> ko append karenge  */
+
+   /* let cr = document.createElement("h2");
+
+    let div =  document.getElementById("d1");
+     
+          div.appendChild(cr);
+          console.log(div);  // yaha 2 <h1> tag ke bad ek <h2> add hoga
+    
+    /* eg 3 append textNode  */
+     let targetNode = document.getElementById("text");
+    let newTextNode = document.createTextNode("I m boy");
+     targetNode.append(newTextNode);
+     console.log(targetNode);
+
+    
+    </script>
+</body>
+</html>

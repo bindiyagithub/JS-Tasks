@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<table id ="api1"></table>
+<table id = "api2"></table>
+
+
+
+<p id="demo"></p>
+
+<script>
+  const person1 = {
+  fullName: function() 
+  {
+    return this.firstName + " " + this.lastName;
+  }
+}
+
+const person2 = {
+  firstName:"John",
+  lastName: "Doe",
+}
+
+
+
+/* yaha person1 mai to firstName & lastName nahi hai , 
+to person1 ka fullname ka this keyword person2 ko refer karega
+ becoz we write  person1.fullName.call(person2);
+ 
+ call() value ko borrow karta hai. yaha person2 mai se value (object) 
+ ko borrow karega. so yaha call() mai as a argument humne person2 liya
+ kyuki unki value borrow karni hai so.....
+  */
+
+  
+let x = person1.fullName.call(person2); 
+document.getElementById("demo").innerHTML = x;  
+
+
+/////////////////////////////////////////////////////////////////////
+
+/* real eg of call() with an api. suppose humako 2 api mai se
+jo common keys hai usko get karna hai, yaha humne 2 api li hai
+usme se street , city , zipcode ye 3 keys jo common hai 
+uski value ko get karna hai to yaha hum call() ka use karenge.
+*/
+
+/*yaha ek myAddressFormatname ka object banya, jisme
+ formatAddress ke keyword mai ek function banaya, yaha
+wo function ke ander h humko street & city & zipcode ki value
+ko get karna hai , so hum this keyword ka use kerke wo properties 
+ko access kiya.  like this......
+return this.street + " " + this.city + " " + this.zipcode;
+
+
+
+note :- suppose 5-6 api mai se bhi kuch common keys(properties) 
+display karvani hai to is tarah h code hoga. */
+
+let myAddressFormat = {
+
+formatAddress : function() 
+{
+
+return this.street + " " + this.city + " " + this.zipcode;
+
+}
+
+}
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(y=>y.json())
+.then(y=> 
+{
+
+   let d=  y.map((value)=> 
+   {
+
+        return myAddressFormat.formatAddress.call(value.address)
+
+    }).join("");
+
+    console.log(d);
+    document.getElementById("api1").innerHTML = d;
+
+});
+
+fetch("https://fakestoreapi.com/users")
+.then(y=>y.json())
+.then(y=> 
+{
+
+   let d=  y.map((value)=> {
+
+        return myAddressFormat.formatAddress.call(value.address);
+
+    }).join(" ");
+
+    console.log(d);
+    document.getElementById("api2").innerHTML = d;
+
+
+})
+
+
+
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>use of for in loop object into object</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <style>
+
+        .d
+        {
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container m-2">
+        <table id="mydisplay" class="table table-bordered table-striped table-hover">
+
+        </table>
+    </div>
+    
+
+    <script>
+
+//https://jsonplaceholder.typicode.com/users
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(y=>y.json()).then(y=> 
+{
+
+    displayInformation(y);
+
+})
+
+
+function displayInformation(data)
+{
+    let mapdata = data.map((element,index)=> {
+
+         let th='<tr class="d">'  // isme <tr> ke ander <th> add hoga 
+
+         let dis ='<tr>' // isme <tr> ke ander <td> add hoga
+
+         for (const key in element) 
+         {
+            if(index == 0)
+            {
+               th += `<th>${key}</th>`
+
+     /* jub object into object ko display karvana hota hai tub <td>
+          ke ander ek <table> lena hota hai , jo humne niche 
+     toDisplayObject function define kiya hai usme banaya hai.
+     then wo function ko yaha humne <td> mai call ker diya hai 
+     dis += `<td> ${toDisplayObject(element[key])}</td>` . it means
+     ager element ka type object hoga to dis name ke var mai <td> +=
+        ho jaye . it means  add hota jaye
+                   */
+     
+     
+     
+               if( typeof element[key] == "object" )
+               {
+                 dis += `<td> ${toDisplayObject(element[key])}</td>` 
+
+               }
+               else
+               {
+                  dis += `<td>${element[key]}</td>` 
+               }
+             }
+        
+         else
+         {
+            if( typeof element[key] == "object" )
+           {
+               dis += `<td> ${toDisplayObject(element[key])}</td>` 
+           }
+           else
+           {
+              dis += `<td>${element[key]}</td>` 
+           }
+          
+          }
+
+        }
+
+     dis += '</tr>';
+
+     th += '</tr>';    
+        
+     return  th  + dis; 
+
+     
+
+    });
+
+    console.log(mapdata.join(" "));
+
+    document.getElementById("mydisplay").innerHTML = mapdata.join("");
+
+
+
+}
+
+/* yaha humne toDisplayObject() function define kiya. uske ander h
+ myinnerTable += `<td>${toDisplayObject(myobj[key])}</td>` humne 
+ yahi function ko call kiya. it means function define kiya , then 
+ wo function ke ander h usko call kiya. it means humne recursive
+ function use kiya. */
+function toDisplayObject(myobj)
+{
+    let myinnerTable = `<table><tr>`
+
+        for (const key in myobj) {
+
+          /* ager myobj ka type object hoga to myinnerTable var mai
+          <td> += ho jayega it means add ho jayega. yaha api mai object
+               ke ander object hai. isliye humne ye chiz ki hai  */
+            if(typeof myobj[key] == "object" )
+            {
+                myinnerTable += `<td>${toDisplayObject(myobj[key])}</td>`
+
+            }
+            else
+            {
+            myinnerTable += `<td>${myobj[key]}</td>`
+
+            }
+        }
+
+
+        myinnerTable += '</tr></table>'
+
+        return myinnerTable;
+
+
+}
+
+
+
+    </script>
+
+</body>
+</html>

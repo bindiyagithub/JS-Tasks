@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="display">This is the javascript </div>
+
+    <script>
+
+        function test()
+        { 
+          document.getElementById("display").style.color = "red";
+        }
+
+        /* yaha test() ko setTimeOut ke ander call kiya bt () nahi
+        liya, kyuki ager hum test() ese lenge to function
+        3 s ka timeout hone se pahele h call ho jayega */
+
+       // let t = setTimeout(test(),3000);  
+                                            /* is tarah karne se This is the javascript
+                                             wali line 3s ke pahele se h
+                                             red color ki show hogi*/ 
+        
+        let t = setTimeout(test , 3000);   /* is tarah fun test ko 
+                                           call karenge so 
+                                           after 3s ke bad h wo line
+                                           red color ki show hogi */
+        
+        
+     /*ager humko data ko 3s ke pahele h cancle(clear ker dena hai)
+     ker dena hai to uske liye clearTimeout() fun ka use hota hai
+      yaha isse wo wali line 3s ke bad red show nahi hogi.
+      kyku settimeout cancle ho gaya. it means 3s ke pahele wo 
+      clear ho gaya. */   
+          // clearTimeout(t);
+
+    </script>
+
+</body>
+</html>

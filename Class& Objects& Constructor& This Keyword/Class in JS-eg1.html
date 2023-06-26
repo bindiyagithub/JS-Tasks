@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Class in JS</title>
+</head>
+<body>
+     <p id="demo"></p>
+
+     <script>
+
+// eg 1 :-
+         /* class Mobile{
+               constructor(){
+                    
+                    console.log("constructor called");
+                    this.model = "Galaxy";
+                    this.display = function(){
+                         return "this is a method";
+                    }
+               }
+               show(){
+                    return this.model + " " + "Price 30000";
+                    // or console mai bhi likh sakte hai.
+                    //console.log("This is The class");
+               }
+          }  */
+
+          
+        /*  let a = new Mobile();
+          console.log(a.model);   // o/p = Galaxy
+
+          console.log(a.display());   // o/p = this is a method
+
+          console.log(a.show());   // o/p = Galaxy  Price 30000
+        */
+
+          
+ // eg 2 :-  constructor with  passing parameters
+ 
+  /*   class RailwayForm{
+
+          constructor(username , trainno , mobileno , cityname){
+
+               this.name =  username;
+               this.trainno = trainno;
+               this.no = mobileno;
+               this.city = cityname;
+          }
+          submit()
+          {
+               alert(this.name +" "+ "your railwayform is submitted for" 
+               +" "+ this.trainno);
+          }
+          cancel()
+          {
+               console.log(this.name +" "+ "sorry! your railwayform is 
+               canceled for"+" "+ this.trainno);
+          }
+     }  */
+      
+     /* yaha humne class ka object banaya (BindiyaForm object hai).
+      jisme uper ke parameter ke liye value pass ker di. 
+    
+     let BindiyaForm = new RailwayForm("Bindiya" , 12388 , 9773065939 , "Jaipur");
+     
+     BindiyaForm.submit();  // ye alert mai show hoga.
+     
+     BindiyaForm.cancel();   // ye console mai display hoga.   
+    
+     */
+
+     /* yaha humne ArjunForm name ka ek dusra object banaya 
+    let ArjunForm = new RailwayForm("Arjun" ,67455 , 7867564534 , "Gondal");
+    
+    ArjunForm.submit();   // show in alert
+    ArjunForm.cancel();  // show in console
+
+     */
+
+</script>
+
+<script>
+/* this keyword :- this keyword refers to an object. it means
+ye keyword object mai use hota hai. ager koi
+bhi object ke ander uski khud ki h property ko access karna hai tub 
+hum this keyword ka use karte hai. it means this refers to a owner
+object */
+
+/* for eg:- it display window object .becoz yaha script tag ke ander
+humne this keyword likha to usko k owner refer karega. so script
+ek window ka object hai & script h owner hai.
+ 
+                 let x = this;
+                 console.log(x);    // o/p = window object */
+
+/* eg 2 :- yaha mayFunction mai liya hua this window object (means script)
+ko refer nahi karega. wo person name ke object ko refer karega. 
+so browser pe o/p = [object Object] & console mai to person object 
+{firstName: 'John', lastName: 'Doe', id: 5566, myFunction: ƒ}
+ese pura object display hoga.
+
+     const person = {
+          firstName  : "John",
+          lastName   : "Doe",
+          id  : 5566,
+          myFunction : function() {
+               return this;
+          }
+               
+     };
+     document.getElementById("demo").innerHTML = person.myFunction();     
+     console.log(person.myFunction());
+*/
+
+/* eg 3 :- yaha humne ek object banaya usme fname, laname key/value
+pair li then fullname ke keyword mai ek function banaya, yaha
+wo function ke ander h humko fname & lname ka use krana hai,
+to wo h(members) object ke ander h fname & lname ko use karna hai
+so hum this keyword ka use kerke wo property ko access ker sakte hai.
+yaha function mai liya hua this , person name ke object ko h refer 
+karega.*/
+             let members = {
+               fname :"Radhu",
+               lname : "Sharma",
+               fullname : function(){
+                         return this.fname +" "+ this.lname;
+               }
+             };
+             console.log(members.fullname());
+
+     </script>
+</body>
+</html>

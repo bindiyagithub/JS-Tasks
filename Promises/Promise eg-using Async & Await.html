@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Promise Using Async & Await</title>
+</head>
+<body>
+     <div id = "displaydata"></div>
+     <script>
+           console.log("Hello How r u!");
+
+         /* function getName(name){
+              let promise = new Promise((resolve , reject) => {
+                    setTimeout(() => {
+                       console.log("Inside Name setTimeOut"); 
+                       resolve(name);   // yaha humne resolve fun call kiya 
+                    } , 2000);
+               })
+               return promise;
+          }
+             
+          function getHobbies(name){
+               let promise1 = new Promise((resolve , reject) => {
+                     setTimeout(() => {
+                       console.log("Inside Hobbies SetTimeOut")
+                       resolve(["Cricket" , "Hockey" , "Dancing" , "Reading"]);
+                     }, 1000);
+               })
+               return promise1;
+          }
+
+          // consuming code
+
+           getName("Bindiya")
+          .then( nm => getHobbies(nm))  // here call getHobbies name fun
+
+          .then(hobby => console.log(hobby))  // isme uper ka resolve mai liya hua array display hoga
+       
+          */
+////////////////////////////////////////////////////////////////////
+
+
+/*hum function mai then() ki jagah  async & await ka bhi 
+use ker sakte hai */
+
+
+        /*  function getName(name){
+              let promise = new Promise((resolve , reject) => {
+                    setTimeout(() => {
+                       console.log("Inside Name setTimeOut"); 
+                       resolve(name);   // yaha name = "Bindiya" ayega 
+                    } , 2000);
+               })
+               return promise;
+          }
+             
+          function getHobbies(name){
+               let promise1 = new Promise((resolve , reject) => {
+                     setTimeout(() => {
+                       console.log("Inside Hobbies SetTimeOut")
+                       resolve(["Cricket" , "Hockey" , "Dancing" , "Reading"]);
+                     }, 1000);
+               })
+               return promise1;
+          }
+
+          async function showHobby(){
+             const nm = await getName("Bindiya")
+             const hobby = await getHobbies(nm)
+             console.log(hobby);
+
+          }
+
+          showHobby();   
+
+     console.log("concept of Async & Await");   */
+
+
+
+///////////////////////////////////////////////////////////////////
+
+// use of async & await in fetch
+
+async  function mydisplay()
+     {
+           /* ye fetch mai jo api li hai uska sara data lana hai
+           (display karvana hai).yaha humne then() ka use nahi kiya hai
+            uski jagah await(it means result ka wait karta hai) ka use kiya hai. 
+            uske bad usko json() mai convert kiya hai(same then mai karte the vese h)*/
+            let mydisplay = await fetch("https://jsonplaceholder.typicode.com/comments")
+            let myfinaldisplay = await mydisplay.json();
+
+            console.log(myfinaldisplay);
+            document.getElementById("displaydata").innerHTML = myfinaldisplay.join("");
+     }
+    
+mydisplay();
+
+
+
+     </script>
+</body>
+</html>
